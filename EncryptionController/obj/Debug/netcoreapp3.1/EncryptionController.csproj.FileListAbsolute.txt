@@ -1,0 +1,9 @@
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\bin\Debug\netcoreapp3.1\EncryptionController.deps.json
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\bin\Debug\netcoreapp3.1\EncryptionController.dll
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\bin\Debug\netcoreapp3.1\EncryptionController.pdb
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\obj\Debug\netcoreapp3.1\EncryptionController.csprojAssemblyReference.cache
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\obj\Debug\netcoreapp3.1\EncryptionController.AssemblyInfoInputs.cache
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\obj\Debug\netcoreapp3.1\EncryptionController.AssemblyInfo.cs
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\obj\Debug\netcoreapp3.1\EncryptionController.csproj.CoreCompileInputs.cache
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\obj\Debug\netcoreapp3.1\EncryptionController.dll
+C:\Users\victo\source\repos\EncryptionAPI\EncryptionController\obj\Debug\netcoreapp3.1\EncryptionController.pdb
