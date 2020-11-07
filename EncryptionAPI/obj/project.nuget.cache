@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "CSFsRJvVAOx2aGTG3rTKlU756hEp1ptmtCiIo6cN1FklUJbLmemnD6YLXJDqAnHAane/fGPbdcD7/z+H3sTO6w==",
+  "dgSpecHash": "+yu5twF7ofPGRraA148I19ckHMkVO6aZ6mLKTgDtYnKikovrQYtLouhmC2CbLlB74UuFZnV9nWV1ydmIZI2GYA==",
   "success": true,
   "projectFilePath": "C:\\Users\\victo\\source\\repos\\EncryptionAPI\\EncryptionAPI\\EncryptionAPI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\victo\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.9\\microsoft.aspnetcore.http.features.3.1.9.nupkg.sha512",
+    "C:\\Users\\victo\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.9\\microsoft.extensions.primitives.3.1.9.nupkg.sha512",
+    "C:\\Users\\victo\\.nuget\\packages\\system.io.pipelines\\4.7.3\\system.io.pipelines.4.7.3.nupkg.sha512"
+  ],
   "logs": []
 }
