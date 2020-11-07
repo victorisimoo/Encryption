@@ -7,47 +7,47 @@ using System.IO;
 namespace EncryptionController.Controllers {
     public class CesarEncryption {
 
-        private static Dictionary<int, int> alfa = new Dictionary<int, int>();
+        private static Dictionary<int, int> principalDictionary = new Dictionary<int, int>();
 
-        private static void obtenerDic(string key, int opc) {
+        private static void getDictionary(string key, int opc) {
 
-            alfa = new Dictionary<int, int>();
+            principalDictionary = new Dictionary<int, int>();
             key = key.ToUpper();
-            var contOriginal = 65;
-            var contNuevo = 65;
+            var originalCount = 65;
+            var newCont = 65;
 
             if (opc == 1) {
                 do {
                     if (key.Length > 0) {
-                        if (!alfa.ContainsValue(key[0])) {
-                            alfa.Add(contOriginal, key[0]);
-                            contOriginal++;
+                        if (!principalDictionary.ContainsValue(key[0])) {
+                            principalDictionary.Add(originalCount, key[0]);
+                            originalCount++;
                         }
                         key = key.Substring(1, key.Length - 1);
                     } else {
-                        if (!alfa.ContainsValue(contNuevo)) {
-                            alfa.Add(contOriginal, contNuevo);
-                            contOriginal++;
+                        if (!principalDictionary.ContainsValue(newCont)) {
+                            principalDictionary.Add(originalCount, newCont);
+                            originalCount++;
                         }
-                        contNuevo++;
+                        newCont++;
                     }
-                } while (contOriginal < 91);
+                } while (originalCount < 91);
             }else {
                 do {
                     if (key.Length > 0) {
-                        if (!alfa.ContainsKey(key[0])) {
-                            alfa.Add(key[0], contOriginal);
-                            contOriginal++;
+                        if (!principalDictionary.ContainsKey(key[0])) {
+                            principalDictionary.Add(key[0], originalCount);
+                            originalCount++;
                         }
                         key = key.Substring(1, key.Length - 1);
                     } else {
-                        if (!alfa.ContainsKey(contNuevo)) {
-                            alfa.Add(contNuevo, contOriginal);
-                            contOriginal++;
+                        if (!principalDictionary.ContainsKey(newCont)) {
+                            principalDictionary.Add(newCont, originalCount);
+                            originalCount++;
                         }
-                        contNuevo++;
+                        newCont++;
                     }
-                } while (contOriginal < 91);
+                } while (originalCount < 91);
             }
         }
 
@@ -58,23 +58,23 @@ namespace EncryptionController.Controllers {
                 Directory.CreateDirectory(Path.Combine(routeDirectory, "encryption"));
             }
 
-            obtenerDic(values.Word, 1);
+            getDictionary(values.Word, 1);
             using (var reader = new BinaryReader(file.OpenReadStream())) {
                 using (var streamWriter = new FileStream(Path.Combine(routeDirectory, "encryption", $"{Path.GetFileNameWithoutExtension(file.FileName)}.crs"), FileMode.OpenOrCreate)){
                     using (var writer = new BinaryWriter(streamWriter)) {
-                        var bufferLength = 10000;
-                        var byteBuffer = new byte[bufferLength];
+                        var bffLength = 10000;
+                        var bffByte = new byte[bffLength];
                         while (reader.BaseStream.Position != reader.BaseStream.Length) {
-                            byteBuffer = reader.ReadBytes(bufferLength);
+                            bffByte = reader.ReadBytes(bffLength);
 
-                            foreach (var caracter in byteBuffer) {
-                                var actual = Convert.ToInt32(caracter);
-                                if (actual >= 65 && actual <= 90) {
-                                    writer.Write((byte)alfa[actual]);
-                                } else if (actual >= 97 && actual <= 122) {
-                                    writer.Write((byte)(alfa[actual - 32] + 32));
+                            foreach (var character in bffByte) {
+                                var actualCharacter = Convert.ToInt32(character);
+                                if (actualCharacter >= 65 && actualCharacter <= 90) {
+                                    writer.Write((byte)principalDictionary[actualCharacter]);
+                                } else if (actualCharacter >= 97 && actualCharacter <= 122) {
+                                    writer.Write((byte)(principalDictionary[actualCharacter - 32] + 32));
                                 } else {
-                                    writer.Write(caracter);
+                                    writer.Write(character);
                                 }
                             }
                         }
@@ -88,22 +88,22 @@ namespace EncryptionController.Controllers {
             if (!Directory.Exists(Path.Combine(routeDirectory, "decryption"))) {
                 Directory.CreateDirectory(Path.Combine(routeDirectory, "decryption"));
             }
-            obtenerDic(values.Word, 2);
+            getDictionary(values.Word, 2);
             using(var reader = new BinaryReader(file.OpenReadStream())) {
                 using (var streamWriter = new FileStream(Path.Combine(routeDirectory, "decryption", $"{Path.GetFileNameWithoutExtension(file.FileName)}.txt"), FileMode.OpenOrCreate)) {
                     using (var writer = new BinaryWriter(streamWriter)) {
-                        var bufferLength = 10000;
-                        var byteBuffer = new byte[bufferLength];
+                        var bffLenght = 10000;
+                        var bffByte = new byte[bffLenght];
                         while (reader.BaseStream.Position != reader.BaseStream.Length) {
-                            byteBuffer = reader.ReadBytes(bufferLength);
+                            bffByte = reader.ReadBytes(bffLenght);
 
-                            foreach (var caracter in byteBuffer) {
+                            foreach (var caracter in bffByte) {
                                 var actual = Convert.ToInt32(caracter);
                                 if (actual >= 65 && actual <= 90) {
-                                    writer.Write((byte)alfa[actual]);
+                                    writer.Write((byte)principalDictionary[actual]);
 
                                 } else if (actual >= 97 && actual <= 122) {
-                                    writer.Write((byte)(alfa[actual - 32] + 32));
+                                    writer.Write((byte)(principalDictionary[actual - 32] + 32));
                                 } else {
                                     writer.Write(caracter);
                                 }

@@ -1,10 +1,7 @@
 ﻿using EncryptionController.Models;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace EncryptionController.Controllers
 {
@@ -18,18 +15,18 @@ namespace EncryptionController.Controllers
             using (var reader = new BinaryReader(file.OpenReadStream())){
                 using (var streamWriter = new FileStream(Path.Combine(routeDirectory, "encryption", $"{Path.GetFileNameWithoutExtension(file.FileName)}.rt"), FileMode.OpenOrCreate)) {
                     using (var writer = new BinaryWriter(streamWriter)) {
-                        var bufferLength = values.Rows * values.Columns;
-                        var byteBuffer = new byte[bufferLength];
+                        var bffLength = values.Rows * values.Columns;
+                        var bffByte = new byte[bffLength];
 
                         while (reader.BaseStream.Position != reader.BaseStream.Length) {
                             var matriz = new byte[values.Rows, values.Columns];
-                            byteBuffer = reader.ReadBytes(bufferLength);
+                            bffByte = reader.ReadBytes(bffLength);
                             var cont = 0;
 
                             for (int i = 0; i < values.Columns; i++) {
                                 for (int j = 0; j < values.Rows; j++) {
-                                    if (cont < byteBuffer.Count()) {
-                                        matriz[j, i] = byteBuffer[cont];
+                                    if (cont < bffByte.Count()) {
+                                        matriz[j, i] = bffByte[cont];
                                         cont++;
                                     }
                                 }
@@ -56,21 +53,21 @@ namespace EncryptionController.Controllers
             using (var reader = new BinaryReader(file.OpenReadStream())) {
                 using (var streamWriter = new FileStream(Path.Combine(routeDirectory, "decryption", $"{Path.GetFileNameWithoutExtension(file.FileName)}.txt"), FileMode.OpenOrCreate)) {
                     using (var writer = new BinaryWriter(streamWriter)) {
-                        var bufferLength = values.Rows * values.Columns;
-                        var byteBuffer = new byte[bufferLength];
+                        var bffLength = values.Rows * values.Columns;
+                        var bffByte = new byte[bffLength];
 
                         while (reader.BaseStream.Position != reader.BaseStream.Length) {
                             var matriz = new byte[values.Rows, values.Columns];
-                            byteBuffer = reader.ReadBytes(bufferLength);
+                            bffByte = reader.ReadBytes(bffLength);
                             var cont = 0;
 
                             for (int i = 0; i < values.Rows; i++)
                             {
                                 for (int j = 0; j < values.Columns; j++)
                                 {
-                                    if (cont < byteBuffer.Count())
+                                    if (cont < bffByte.Count())
                                     {
-                                        matriz[i, j] = byteBuffer[cont];
+                                        matriz[i, j] = bffByte[cont];
                                         cont++;
                                     }
                                     else
